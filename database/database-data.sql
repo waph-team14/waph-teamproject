@@ -1,3 +1,8 @@
-create database waph_team;
-CREATE USER 'koppulrh'@'localhost' IDENTIFIED BY 'Pa$$w0rd'
-GRANT ALL ON waph_team.* TO 'koppulrh'@'localhost';
+drop table if exists `users`;
+
+CREATE TABLE users(
+	username VARCHAR(50) PRIMARY KEY,
+	password VARCHAR(100) NOT NULL);
+	
+
+	INSERT INTO users (username, password) VALUES ('admin', MD5('Pa$$w0rd'));

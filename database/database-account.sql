@@ -1,3 +1,3 @@
 create database waph_team;
-CREATE USER 'koppulrh'@'localhost' IDENTIFIED BY 'Pa$$w0rd'
-GRANT ALL ON waph_team.* TO 'koppulrh'@'localhost';
+CREATE USER 'waphteam14'@'localhost' IDENTIFIED BY '1234';
+GRANT ALL ON waph_team.* TO 'waphteam14'@'localhost';
