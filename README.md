@@ -3,11 +3,11 @@
 
 ## Instructor: Dr. Phu Phung
 
-# MINIFACEBOOK
+# Project Topic/Title - Mini Facebook
 
 # Team members
 
-1. Member 1, email
+1. Phani Gopaluni, gopaluna@mail.uc.edu
 2. Koppula Rohith, koppulrh@mail.uc.edu
 3. Member 3, email
 4. Member 4, email
@@ -19,15 +19,16 @@
 [Project homepage (public)](https://github.com/waph-team14/waph-team14.github.io)
 
 ## Revision History
-
-| Date       |   Version     |  Description |
-|------------|:-------------:|-------------:|
-| DD/MM/YYYY |  0.0          | Init draft   |
-
+|Date       |Version    |Description    |
+|-----------|-----------|---------------|
+|24/03/2024 |0.1        |Sprint 0       |
 
 # Overview
-
-we are going to create a mini facebook web application 
+* In this team project, we are going to develop a mini facebook application with minimal featuers such as posting and commenting.
+* Sprint 0 - Tasks
+    * Setup Code Repositories
+    * Create SSL Certificates and Configure the Server
+    * Replicate Lab 3 and Modify it per Lab 4 Requirements.
 
 # System Analysis
 
