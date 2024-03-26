@@ -11,8 +11,9 @@
     * ![Phani's Headshot](phani_headshot.jpeg)
 2. Koppula Rohith, koppulrh@mail.uc.edu
    * ![rohith's Headshot](head.png)
-4. Member 3, email
-5. Member 4, email
+4. Jaswanth Bollepalli, bollepjh@mail.uc.edu
+   * ![Jaswanth's Headshot](
+6. Member 4, email
 
 # Project Management Information
 
