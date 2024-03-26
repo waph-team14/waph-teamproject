@@ -54,7 +54,7 @@ created private key and certificate for our local web server and a database for 
 
 
 # Demo (screenshots)
-
+![gopaluna-sprint-0](gopaluna-sprint-0.png)
 
 
 # Software Process Management
