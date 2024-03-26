@@ -61,7 +61,7 @@ Duration: 22/03/2024-26/03/2024
 2. Created a sample index.html file in the root directory of this new domain.
 
 #### Contributions: 
-1. Member 1, x commits, y hours, contributed in xxx
+1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
 3. Member 3, x commits, y hours, contributed in xxx
 4. Member 4, x commits, y hours, contributed in xxx
