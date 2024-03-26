@@ -12,7 +12,7 @@
 2. Koppula Rohith, koppulrh@mail.uc.edu
    * ![rohith's Headshot](head.png)
 4. Jaswanth Bollepalli, bollepjh@mail.uc.edu
-   * ![Jaswanth's Headshot](
+   * ![Jaswanth's Headshot](jashheadshot.jpeg)
 6. Member 4, email
 
 # Project Management Information
