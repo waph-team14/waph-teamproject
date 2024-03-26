@@ -10,8 +10,9 @@
 1. Phani Gopaluni, gopaluna@mail.uc.edu
     * ![Phani's Headshot](phani_headshot.jpeg)
 2. Koppula Rohith, koppulrh@mail.uc.edu
-3. Member 3, email
-4. Member 4, email
+   * ![rohith's Headshot](head.png)
+4. Member 3, email
+5. Member 4, email
 
 # Project Management Information
 
