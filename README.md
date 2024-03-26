@@ -47,6 +47,7 @@
 
 # Demo (screenshots)
 ![gopaluna-sprint-0](gopaluna-sprint-0.png)
+![koppulrh-sprint-0](koppulrh-sprint-0.png)
 
 # Software Process Management
 
