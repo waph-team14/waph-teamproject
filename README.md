@@ -11,9 +11,10 @@
     * ![Phani's Headshot](phani_headshot.jpeg)
 2. Koppula Rohith, koppulrh@mail.uc.edu
    * ![rohith's Headshot](head.png)
+3. Sravan Kumar Bhavana, bhavansr@mail.uc.edu
+   * ![Sravan Headshot](my.jpg)
 4. Jaswanth Bollepalli, bollepjh@mail.uc.edu
    * ![Jaswanth's Headshot](jashheadshot.jpeg)
-6. Member 4, email
 
 # Project Management Information
 
@@ -49,6 +50,7 @@
 # Demo (screenshots)
 ![gopaluna-sprint-0](gopaluna-sprint-0.png)
 ![koppulrh-sprint-0](koppulrh-sprint-0.png)
+![sravan-sprint-0](sravan_certificate.png)
 
 # Software Process Management
 
