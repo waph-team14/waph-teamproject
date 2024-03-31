@@ -60,7 +60,9 @@ The system will have two roles.
 * The following diagrams explains the entities and their relationships. Also shows the database schema that we are going to crate.
 ![entity-relationship-diagram](sprint-1/entity-relationship-diagram.png)
 ## User Interface
+![wireframe-1](wireframes/w1.jpeg)
 
+![wireframe-](wireframes/w1.jpeg)
 # Implementation
 ## Sprint 0
 * Created private key and certificate for our local web server and a database for the project.
