@@ -1,0 +1,85 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Neutral color for the page background */
+}
+
+.profile-body {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #212529; /* Bootstrap's default dark */
+    border-radius: 0.25rem;
+}
+.profile-image {
+    width: 120px; /* Adjust size as needed */
+    height: 120px; /* Adjust size as needed */
+    object-fit: cover; /* Keep the aspect ratio */
+    border: 3px solid #ffffff; /* White border around the image */
+}
+
+.profile-header {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: #ffffff;
+    border-radius: 0.25rem;
+    padding-bottom: 30px; /* Extra padding to accommodate the image */
+}
+.card-container {
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bg-blue {
+    background-color: #007bff; /* Bootstrap primary blue */
+    padding: 20px;
+    border-radius: 15px 15px 0 0; /* Rounded corners at the top */
+}
+
+.main-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 0 0 15px 15px; /* Rounded corners at the bottom */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    margin-bottom: 20px;
+    color: #ffffff; /* White color for contrast against the blue background */
+    text-align: center;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.btn.custom-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+.btn.custom-btn:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.icon {
+    color: #495057;
+    margin-right: 8px;
+}
