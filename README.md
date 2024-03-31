@@ -66,6 +66,13 @@ The system will have two roles.
 * Created private key and certificate for our local web server and a database for the project.
 * Copied the code from lab3 and lab4 to setup sample login forms and home page.
 
+## Sprint 1
+* Run the following commands to setup the database. For the second command, use the password 1234.
+```bash
+sudo mysql -u root < database/database-account.sql
+sudo mysql -u waphteam14 -p < database/database-data.sql
+```
+
 # Security analysis
 
 # Demo (screenshots)
@@ -125,7 +132,7 @@ Duration: 25/03/2024-31/03/2024
 0. Update the README.md structures
    * Created Roadmap
    * Planned Sprint 1
-   * Divided the tasks
+   * Divided the tasks among ourselves
 1. Created an architecture diagram realizing all the use cases.
 2. Created an Entity Relation Ship Diagram that explains the Database Schema.
 3. Crated Database DDL Statements
