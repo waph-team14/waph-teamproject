@@ -1,4 +1,9 @@
-drop table if exists `users`;
+USE waph_team;
+
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `posts`;
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `chat`;
 
 CREATE TABLE users (
     userID INT AUTO_INCREMENT PRIMARY KEY,
