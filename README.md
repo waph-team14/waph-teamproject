@@ -56,6 +56,22 @@
 
 ## Scrum process
 
+### Roadmap
+1. Setup and configure the server as per requirements.
+2. Setup initial login flow copied from labs 3 & 4 and adds ample index.html for sprint 0 check up.
+3. Sprint - 1
+   * Finish the architecture diagram
+   * Finish the database schema design.
+   * Create the SQL files for DDL statements and to insert some seed data.
+   * Code for the application (both frontend (using bootstrap for the frontend) and backend)
+      * Finalize Registration Page
+      * Finalize Login Page
+      * Change password page.
+      * Edit profile page.
+      * Home page with list of posts.
+4. Sprint - 2
+5. Sprint - 3
+
 ### Sprint 0
 Duration: 22/03/2024-26/03/2024
 
