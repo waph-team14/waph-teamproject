@@ -1,8 +1,44 @@
 drop table if exists `users`;
 
-CREATE TABLE users(
-	username VARCHAR(50) PRIMARY KEY,
-	password VARCHAR(100) NOT NULL
+CREATE TABLE users (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    phone VARCHAR(20),
+    isDisabled BOOLEAN NOT NULL DEFAULT FALSE,
+    isSuperuser BOOLEAN NOT NULL DEFAULT FALSE
 );
-	
-INSERT INTO users (username, password) VALUES ('admin', MD5('Pa$$w0rd'));
+
+CREATE TABLE posts (
+    postID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    content TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+		FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+    commentID INT AUTO_INCREMENT PRIMARY KEY,
+    postID INT NOT NULL,
+    userID INT NOT NULL,
+    comment TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (postID) REFERENCES posts(postID) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+);
+
+CREATE TABLE chat (
+    chatID INT AUTO_INCREMENT PRIMARY KEY,
+    fromUserID INT NOT NULL,
+    toUserID INT NOT NULL,
+    message TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fromUserID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (toUserID) REFERENCES users(userID) ON DELETE CASCADE
+);
+
+
+
+

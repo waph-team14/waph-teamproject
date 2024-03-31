@@ -92,12 +92,18 @@ The system will have two roles.
    * Finish the architecture diagram. - Phani
    * Finish the database schema design. - Phani
    * Create the SQL files for DDL statements and to insert some seed data. - Phani
+   * Create Wireframes - Rohith
    * Code for the application (both frontend (using bootstrap for the frontend) and backend)
-      * Finalize Registration Page
-      * Finalize Login Page
-      * Change password page.
-      * Edit profile page.
-      * Home page with list of posts.
+      * Finalize Registration Page - Sravan
+      * Finalize Login Page - Sravan
+      * Change password page. - Sravan
+         * Should be inside profile page
+         * Should have CSRF protection.
+      * Edit profile page. - Rohith
+         * Should be inside profile page.
+      * Home page with list of posts. - Jash
+         * Should include a navbar with links to profile page, chat page, logout.
+         * Just list the posts. We will work on comments in the next sprint.
 4. Sprint - 2
 5. Sprint - 3
 6. Video Demo & Report Submission.
@@ -116,7 +122,14 @@ Duration: 18/03/2024-24/03/2024
 ### Sprint 1
 Duration: 25/03/2024-31/03/2024
 #### Completed Tasks: 
-1. 
+0. Update the README.md structures
+   * Created Roadmap
+   * Planned Sprint 1
+   * Divided the tasks
+1. Created an architecture diagram realizing all the use cases.
+2. Created an Entity Relation Ship Diagram that explains the Database Schema.
+3. Crated Database DDL Statements
+
 #### Contributions: 
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
