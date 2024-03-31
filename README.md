@@ -60,9 +60,9 @@
 1. Setup and configure the server as per requirements.
 2. Setup initial login flow copied from labs 3 & 4 and adds ample index.html for sprint 0 check up.
 3. Sprint - 1
-   * Finish the architecture diagram
-   * Finish the database schema design.
-   * Create the SQL files for DDL statements and to insert some seed data.
+   * Finish the architecture diagram. - Phani
+   * Finish the database schema design. - Phani
+   * Create the SQL files for DDL statements and to insert some seed data. - Phani
    * Code for the application (both frontend (using bootstrap for the frontend) and backend)
       * Finalize Registration Page
       * Finalize Login Page
