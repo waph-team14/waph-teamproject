@@ -8,13 +8,13 @@
 # Team members
 
 1. Phani Gopaluni, gopaluna@mail.uc.edu
-    * ![Phani's Headshot](phani_headshot.jpeg)
+    * ![Phani's Headshot](headshots/phani_headshot.jpeg)
 2. Koppula Rohith, koppulrh@mail.uc.edu
-   * ![rohith's Headshot](head.png)
+   * ![rohith's Headshot](headshots/head.png)
 3. Sravan Kumar Bhavana, bhavansr@mail.uc.edu
-   * ![Sravan Headshot](my.jpg)
+   * ![Sravan Headshot](headshots/my.jpg)
 4. Jaswanth Bollepalli, bollepjh@mail.uc.edu
-   * ![Jaswanth's Headshot](jashheadshot.jpeg)
+   * ![Jaswanth's Headshot](headshots/jashheadshot.jpeg)
 
 # Project Management Information
 
@@ -48,9 +48,9 @@
 # Security analysis
 
 # Demo (screenshots)
-![gopaluna-sprint-0](gopaluna-sprint-0.png)
-![koppulrh-sprint-0](koppulrh-sprint-0.png)
-![sravan-sprint-0](sravan_certificate.png)
+![gopaluna-sprint-0](sprint-0/gopaluna-sprint-0.png)
+![koppulrh-sprint-0](sprint-0/koppulrh-sprint-0.png)
+![sravan-sprint-0](sprint-0/sravan_certificate.png)
 
 # Software Process Management
 
@@ -71,6 +71,7 @@
       * Home page with list of posts.
 4. Sprint - 2
 5. Sprint - 3
+6. Video Demo & Report Submission.
 
 ### Sprint 0
 Duration: 22/03/2024-26/03/2024
