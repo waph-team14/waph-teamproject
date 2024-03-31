@@ -6,7 +6,6 @@
 # Project Topic/Title - Mini Facebook
 
 # Team members
-
 1. Phani Gopaluni, gopaluna@mail.uc.edu
     * ![Phani's Headshot](headshots/phani_headshot.jpeg)
 2. Koppula Rohith, koppulrh@mail.uc.edu
@@ -17,45 +16,75 @@
    * ![Jaswanth's Headshot](headshots/jashheadshot.jpeg)
 
 # Project Management Information
-
 [Source code repository (private access)](https://github.com/waph-team14/waph-teamproject)
-
 [Project homepage (public)](https://github.com/waph-team14/waph-team14.github.io)
 
 ## Revision History
 |Date       |Version    |Description    |
 |-----------|-----------|---------------|
 |24/03/2024 |0.1        |Sprint 0       |
+|-----------|-----------|---------------|
+|31/03/2024 |0.2        |Sprint 1       |
 
 # Overview
-* In this team project, we are going to develop a mini facebook application with minimal featuers such as posting and commenting.
-* Sprint 0 - Tasks
-    * Setup Code Repositories
-    * Create SSL Certificates and Configure the Server
-    * Replicate Lab 3 and Modify it per Lab 4 Requirements.
+* In this team project, we are going to develop a mini facebook application with minimal features such as posting real time chat.
+* To implement this project, the tech stack used is
+   * Backend - PHP
+   * Frontend - HTML, CSS (Bootstrap), JavaScript
+   * Database - Relational, MySQL
+   * Web Server - Apache2
 
 # System Analysis
-
 ## High-level Requirements
+The system will have two roles.
+1. Normal User.
+   * Registration
+   * Login
+   * Change Password
+   * Edit Profile
+   * Add a post
+   * Edit or Delete their own posts
+   * View the posts in home page.
+   * View and add comments for each post.
+   * Real time chat.
+2. Super User 
+   * Login (No Registration)
+   * Disable a registered user
+   * Enable a registered user
 
+# System Design
+## Use Case Realization
+* The following diagrams explains the use cases for the normal user and also provide the details of tech stack.
+![project-architecture](sprint-1/project-architecture.png)
 ## Database 
-
+* The following diagrams explains the entities and their relationships. Also shows the database schema that we are going to crate.
+![entity-relationship-diagram](sprint-1/entity-relationship-diagram.png)
 ## User Interface
 
 # Implementation
+## Sprint 0
 * Created private key and certificate for our local web server and a database for the project.
+* Copied the code from lab3 and lab4 to setup sample login forms and home page.
 
 # Security analysis
 
 # Demo (screenshots)
+## Sprint - 0
 ![gopaluna-sprint-0](sprint-0/gopaluna-sprint-0.png)
 ![koppulrh-sprint-0](sprint-0/koppulrh-sprint-0.png)
 ![sravan-sprint-0](sprint-0/sravan_certificate.png)
 
 # Software Process Management
+* Our team is following Agile Scrum Methodology.
+* We are having weekly sprints. Sprint starts on Monday and Ends on Sunday.
+* On Monday morning, we are having sprint planning to discuss the tasks that are to be done in the current sprint.
+* We are having daily stand ups for 15 minutes to discuss progress everyday. Standup meeting notes is
+   * What is done?
+   * What is pending?
+   * Any blockers?
+* Since all of us are actively participating in development process, we are not having sprint retrospective meetings.
 
 ## Scrum process
-
 ### Roadmap
 1. Setup and configure the server as per requirements.
 2. Setup initial login flow copied from labs 3 & 4 and adds ample index.html for sprint 0 check up.
@@ -74,12 +103,20 @@
 6. Video Demo & Report Submission.
 
 ### Sprint 0
-Duration: 22/03/2024-26/03/2024
-
+Duration: 18/03/2024-24/03/2024
 #### Completed Tasks: 
 1. Finished setting up ssl certificates and creating the local domain for waph-team14.minifacebook.com
 2. Created a sample index.html file in the root directory of this new domain.
+#### Contributions: 
+1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
+2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
+3. Member 3, x commits, y hours, contributed in xxx
+4. Member 4, x commits, y hours, contributed in xxx
 
+### Sprint 1
+Duration: 25/03/2024-31/03/2024
+#### Completed Tasks: 
+1. 
 #### Contributions: 
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
