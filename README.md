@@ -80,6 +80,7 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
 ![gopaluna-sprint-0](sprint-0/gopaluna-sprint-0.png)
 ![koppulrh-sprint-0](sprint-0/koppulrh-sprint-0.png)
 ![sravan-sprint-0](sprint-0/sravan_certificate.png)
+![jaswanth-sprint-0](sprint-0/jash-certificate.png)
 
 # Software Process Management
 * Our team is following Agile Scrum Methodology.
@@ -141,7 +142,7 @@ Duration: 25/03/2024-31/03/2024
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
 3. Member 3, x commits, y hours, contributed in xxx
-4. Member 4, x commits, y hours, contributed in xxx
+4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 
 
 # Appendix
