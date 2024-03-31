@@ -125,7 +125,7 @@ Duration: 18/03/2024-24/03/2024
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
 3. Member 3, x commits, y hours, contributed in xxx
-4. Member 4, x commits, y hours, contributed in xxx
+4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 
 ### Sprint 1
 Duration: 25/03/2024-31/03/2024
