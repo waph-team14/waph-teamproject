@@ -125,7 +125,7 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
          * Should have CSRF protection.
       * Edit profile page. - Rohith
          * Should be inside profile page.
-      * Home page with list of posts. - Jash
+      * Home page with list of posts. - Jashwanth
          * Should include a navbar with links to profile page, chat page, logout.
          * Just list the posts. We will work on comments in the next sprint.
 4. Sprint - 2
@@ -155,8 +155,8 @@ Duration: 25/03/2024-31/03/2024
 3. Crated Database DDL Statements
 
 #### Contributions: 
-1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
-2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
+1. Rohith Koppula, 5 commits, 4 hours, contributed in generating editProfile, view profile pages and wireframes for project layout and edited the README.md.
+2. Phani Gopaluni, 8 commits, 4 hours, contributed in generating database-data.sql and generated architecture and ER diagrams and editing README.md
 3. Member 3, x commits, y hours, contributed in xxx
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 
@@ -164,3 +164,6 @@ Duration: 25/03/2024-31/03/2024
 # Appendix
 
 Include the content (in text, not as images) of the SQL files and all source code of your PHP files (with the file name). 
+
+
+
