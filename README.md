@@ -62,7 +62,21 @@ The system will have two roles.
 ## User Interface
 ![wireframe-1](wireframes/w1.jpeg)
 
-![wireframe-](wireframes/w1.jpeg)
+![wireframe-2](wireframes/w2.jpeg)
+
+![wireframe-3](wireframes/w3.jpeg)
+
+![wireframe-4](wireframes/w4.jpeg)
+
+![wireframe-5](wireframes/w5.jpeg)
+
+![wireframe-6](wireframes/w6.jpeg)
+
+![wireframe-7](wireframes/w7.jpeg)
+
+![wireframe-8](wireframes/w8.jpeg)
+
+
 # Implementation
 ## Sprint 0
 * Created private key and certificate for our local web server and a database for the project.
