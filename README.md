@@ -166,7 +166,6 @@ Duration: 25/03/2024-31/03/2024
 3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 =======
-3. Member 3, x commits, y hours, contributed in xxx
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project.
 >>>>>>> origin/main
 
