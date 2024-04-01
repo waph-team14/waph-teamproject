@@ -164,9 +164,7 @@ Duration: 25/03/2024-31/03/2024
 2. Phani Gopaluni, 8 commits, 4 hours, contributed in generating database-data.sql and generated architecture and ER diagrams and editing README.md
 <<<<<<< HEAD
 3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
-4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
-=======
-4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project.
+4. Jaswanth Bollepalli, 6 commits, 4 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project .including navigatiom.html file including file links to logout.html,chat.html,profile.html
 >>>>>>> origin/main
 
 
