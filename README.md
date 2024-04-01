@@ -125,7 +125,7 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
          * Should have CSRF protection.
       * Edit profile page. - Rohith
          * Should be inside profile page.
-      * Home page with list of posts. - Jashwanth
+      * Home page with list of posts. - Jaswanth
          * Should include a navbar with links to profile page, chat page, logout.
          * Just list the posts. We will work on comments in the next sprint.
 4. Sprint - 2
@@ -140,8 +140,13 @@ Duration: 18/03/2024-24/03/2024
 #### Contributions: 
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
+<<<<<<< HEAD
 3. Sravan Kumar, 2 commits, 1 hour, contributed in verfying the tasks.
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
+=======
+3. Member 3, x commits, y hours, contributed in xxx
+4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file performing specific task
+>>>>>>> origin/main
 
 ### Sprint 1
 Duration: 25/03/2024-31/03/2024
@@ -157,8 +162,13 @@ Duration: 25/03/2024-31/03/2024
 #### Contributions: 
 1. Rohith Koppula, 5 commits, 4 hours, contributed in generating editProfile, view profile pages and wireframes for project layout and edited the README.md.
 2. Phani Gopaluni, 8 commits, 4 hours, contributed in generating database-data.sql and generated architecture and ER diagrams and editing README.md
+<<<<<<< HEAD
 3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
+=======
+3. Member 3, x commits, y hours, contributed in xxx
+4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project.
+>>>>>>> origin/main
 
 
 # Appendix
