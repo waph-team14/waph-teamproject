@@ -140,7 +140,7 @@ Duration: 18/03/2024-24/03/2024
 #### Contributions: 
 1. Member 1, 5 commits, 4 hours, contributed in generating database and reprository and ssl key's and certificate and sample html file.
 2. Phani Gopaluni, 3 commits, 4 hours, contributed in generating sample.html file and editing README.md
-3. Member 3, x commits, y hours, contributed in xxx
+3. Sravan Kumar, 2 commits, 1 hour, contributed in verfying the tasks.
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 
 ### Sprint 1
@@ -157,7 +157,7 @@ Duration: 25/03/2024-31/03/2024
 #### Contributions: 
 1. Rohith Koppula, 5 commits, 4 hours, contributed in generating editProfile, view profile pages and wireframes for project layout and edited the README.md.
 2. Phani Gopaluni, 8 commits, 4 hours, contributed in generating database-data.sql and generated architecture and ER diagrams and editing README.md
-3. Member 3, x commits, y hours, contributed in xxx
+3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
 4. Jaswanth Bollepalli, 5 commits, 3 hours, contributed in editing README.md file and performing specific task
 
 
