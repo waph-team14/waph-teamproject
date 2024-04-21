@@ -46,6 +46,7 @@ $_SESSION["nocsrftoken"] = $rand;
 				<a href="index.php" class="brand-logo p2">Mini Facebook</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="index.php">Home</a></li>
+					<li><a href="changepasswordform.php">Change Password</a></li>
 					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
