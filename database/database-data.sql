@@ -6,8 +6,10 @@ DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `chat`;
 
 CREATE TABLE users (
-    userID INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
+    additionalEmail VARCHAR(255),
     password VARCHAR(255) NOT NULL,
     name VARCHAR(255),
     phone VARCHAR(20),

@@ -31,13 +31,13 @@ require "session_auth.php";
 
 function checklogin_mysql($username, $password)
 {
-	$mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+	$mysqli = new mysqli('localhost', 'gopaluna', 'phani@123', 'waph');
 	if ($mysqli->connect_errno) {
 		printf("Database connection failed: %s\n", $mysqli->connect_errno);
 		exit();
 	}
 
-	$prepared_sql = "SELECT name, email, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
+	$prepared_sql = "SELECT name, email FROM users WHERE username = ? AND password = md5(?);";
 	$stmt = $mysqli->prepare($prepared_sql);
 	$stmt->bind_param("ss", $username, $password);
 	$stmt->execute();
@@ -46,15 +46,11 @@ function checklogin_mysql($username, $password)
 	if ($stmt->num_rows == 1) {
 		$name = null;
 		$email = null;
-		$phone = null;
-		$isSuperuser = null;
-		$stmt->bind_result($name, $email, $phone, $isSuperuser);
+		$stmt->bind_result($name, $email);
 		$stmt->fetch();
 
 		$_SESSION["name"] = $name;
 		$_SESSION["email"] = $email;
-		$_SESSION["phone"] = $phone;
-		$_SESSION["isSuperuser"] = $isSuperuser;
 
 		return TRUE;
 	}
