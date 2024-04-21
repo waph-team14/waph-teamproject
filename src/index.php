@@ -22,7 +22,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 		$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
 	} else {
 		session_destroy();
-		echo "<script>alert('Invalid username/password');window.location='form.php';</script>";
+		echo "<script>alert('Invalid username/password');window.location='login-form.php';</script>";
 		die();
 	}
 }
@@ -37,21 +37,23 @@ function checklogin_mysql($username, $password)
 		exit();
 	}
 
-	$prepared_sql = "SELECT name, email, additionalEmail, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
+	$prepared_sql = "SELECT userId, name, email, additionalEmail, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
 	$stmt = $mysqli->prepare($prepared_sql);
 	$stmt->bind_param("ss", $username, $password);
 	$stmt->execute();
 	$stmt->store_result();
 
 	if ($stmt->num_rows == 1) {
+		$userId = null;
 		$name = null;
 		$email = null;
 		$additionalEmail = null;
 		$phone = null;
 		$isSuperuser = null;
-		$stmt->bind_result($name, $email, $additionalEmail, $phone, $isSuperuser);
+		$stmt->bind_result($userId, $name, $email, $additionalEmail, $phone, $isSuperuser);
 		$stmt->fetch();
 
+		$_SESSION["userId"] = $userId;
 		$_SESSION["name"] = $name;
 		$_SESSION["email"] = $email;
 		$_SESSION["additionalEmail"] = $additionalEmail;
@@ -69,14 +71,15 @@ function checklogin_mysql($username, $password)
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+
 		<!-- Compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	
+
 		<nav>
 			<div class="nav-wrapper blue">
 				<a href="index.php" class="brand-logo p2">Mini Facebook</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="posts-page.php">Posts</a></li>
 					<li><a href="editprofileform.php">Profile</a></li>
 					<li><a href="logout.php">Logout</a></li>
 				</ul>

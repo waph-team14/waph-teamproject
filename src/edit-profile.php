@@ -36,10 +36,11 @@ if (editprofile($username, $name, $email, $additionalEmail, $phone)) {
 
 send_response($isSuccess, $errorMessage);
 
-function send_response($isSuccess, $errorMessage) {
+function send_response($isSuccess, $errorMessage)
+{
     echo json_encode([
-        "success"=> $isSuccess,
-        "errroMessage"=> $errorMessage
+        "success" => $isSuccess,
+        "errroMessage" => $errorMessage
     ]);
 }
 
@@ -56,8 +57,6 @@ function editprofile($username, $name, $email, $additionalEmail, $phone)
     $stmt->bind_param("sssss", $name, $email, $additionalEmail, $phone, $username);
 
     if ($stmt->execute()) {
-        error_log("successully executed the update query with $username");
-        error_log($stmt->affected_rows);
         $_SESSION["name"] = $name;
         $_SESSION["email"] = $email;
         $_SESSION["additionalEmail"] = $additionalEmail;
@@ -68,5 +67,3 @@ function editprofile($username, $name, $email, $additionalEmail, $phone)
     }
     return false;
 }
-
-?>
