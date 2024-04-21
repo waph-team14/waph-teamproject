@@ -37,7 +37,7 @@ function checklogin_mysql($username, $password)
 		exit();
 	}
 
-	$prepared_sql = "SELECT name, email, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
+	$prepared_sql = "SELECT name, email, additionalEmail, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
 	$stmt = $mysqli->prepare($prepared_sql);
 	$stmt->bind_param("ss", $username, $password);
 	$stmt->execute();
@@ -46,13 +46,15 @@ function checklogin_mysql($username, $password)
 	if ($stmt->num_rows == 1) {
 		$name = null;
 		$email = null;
+		$additionalEmail = null;
 		$phone = null;
 		$isSuperuser = null;
-		$stmt->bind_result($name, $email, $phone, $isSuperuser);
+		$stmt->bind_result($name, $email, $additionalEmail, $phone, $isSuperuser);
 		$stmt->fetch();
 
 		$_SESSION["name"] = $name;
 		$_SESSION["email"] = $email;
+		$_SESSION["additionalEmail"] = $additionalEmail;
 		$_SESSION["phone"] = $phone;
 		$_SESSION["isSuperuser"] = $isSuperuser;
 
@@ -62,29 +64,23 @@ function checklogin_mysql($username, $password)
 }
 ?>
 
-<div class="container">
-	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-	<style>
-		.header {
-			width: 100%;
-			align-items: center;
-			justify-content: center;
-		}
-	</style>
-
-	<div class="header">
-		<h1>Home Page</h1>
+<body>
+	<div class="container">
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	
+		<nav>
+			<div class="nav-wrapper blue">
+				<a href="index.php" class="brand-logo p2">Mini Facebook</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="editprofileform.php">Profile</a></li>
+					<li><a href="logout.php">Logout</a></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
-
-	<h2> Welcome <?php echo htmlentities($_SESSION['username']); ?> !</h2>
-	<p> Full Name: <?php echo htmlentities($_SESSION['name']); ?></p>
-	<p> Email: <?php echo htmlentities($_SESSION['email']); ?></p>
-	<a href="editprofileform.php">Edit Profile</a> |
-	<a href="changepasswordform.php">Change Password</a> | <a href="logout.php">Logout</a>
-</div>
+</body>
