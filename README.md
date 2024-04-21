@@ -96,7 +96,7 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
 ![gopaluna-sprint-0](sprint-0/gopaluna-sprint-0.png)
 ![koppulrh-sprint-0](sprint-0/koppulrh-sprint-0.png)
 ![sravan-sprint-0](sprint-0/sravan_certificate.png)
-![jaswanth-sprint-0](sprint-0/jash-certificate.png)
+![jaswanth-sprint-0](sprint-0/certificate.png)
 
 # Software Process Management
 * Our team is following Agile Scrum Methodology.
