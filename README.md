@@ -129,8 +129,18 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
          * Should include a navbar with links to profile page, chat page, logout.
          * Just list the posts. We will work on comments in the next sprint.
 4. Sprint - 2
-5. Sprint - 3
-6. Video Demo & Report Submission.
+   ***Note** for this Sprint the team as gown throught the **pair programming**, the team has gathered together
+and implemented our ideas together and completed the sprint.
+   * made several changes to the database.-phani
+   * rewrote the login page -sravan
+   * implemented changes to change password page -sravan
+   * implemented changes to edit profile page -rohith
+   * implemented and changes to the homme page -jaswanth
+   * created posts page - phani
+      * functions like add post delete post and update post were implemented.
+      * comments on posts is implemeted.
+6. Sprint - 3
+7. Video Demo & Report Submission.
 
 ### Sprint 0
 Duration: 18/03/2024-24/03/2024
@@ -162,6 +172,24 @@ Duration: 25/03/2024-31/03/2024
 #### Contributions: 
 1. Rohith Koppula, 5 commits, 4 hours, contributed in generating editProfile, view profile pages and wireframes for project layout and edited the README.md.
 2. Phani Gopaluni, 8 commits, 4 hours, contributed in generating database-data.sql and generated architecture and ER diagrams and editing README.md
+<<<<<<< HEAD
+3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
+4. Jaswanth Bollepalli, 6 commits, 4 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project .including navigatiom.html file including file links to logout.html,chat.html,profile.html
+>>>>>>> origin/main
+
+### Sprint 2
+Duration: 16/04/2024-21/22/2024
+#### Completed Tasks: 
+0. Update the README.md structures
+   * Created Roadmap
+   * Planned Sprint 2
+   * Did pair programming with the whole team
+1. update Database and with new entities.
+2. introduced new pages and updated previous pages  
+
+#### Contributions: 
+1. Rohith Koppula, 3 commits, 8 hours, contributed in generating editProfile, view profile pages and edited the README.md.
+2. Phani Gopaluni, 10 commits, 8 hours, contributed in implementing new data in database-data.sql and created posts page along with several action for the post page involvements 
 <<<<<<< HEAD
 3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
 4. Jaswanth Bollepalli, 6 commits, 4 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project .including navigatiom.html file including file links to logout.html,chat.html,profile.html
