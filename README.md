@@ -1,4 +1,4 @@
-
+### sprint-2 
 # WAPH-Web Application Programming and Hacking
 
 ## Instructor: Dr. Phu Phung
@@ -91,6 +91,84 @@ sudo mysql -u root < database/database-account.sql
 sudo mysql -u waphteam14 -p < database/database-data.sql
 ```
 ## Sprint 2
+### Sprint 2
+0. Update the README.md structures
+   * database designing and implementation
+  ## code for database implementation (creating posts code)
+  in this code we created a table to store posts data 
+  
+  ```CREATE TABLE posts (
+    postID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+		FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+);
+```
+   * Planned Sprint 2
+   * Divided the tasks among ourselves
+### 2 logged in users can add a new post
+logged in users can add a new post
+to implement this feature we used this code in our project. this is the function we used in our project to addnewpost to our mini facebook page.
+```
+function addNewPost($userId, $postTitle, $postContent)
+{
+  $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+  if ($mysqli->connect_errno) {
+    printf("Database connection failed: %s\n", $mysqli->connect_errno);
+    return false;
+  }
+``` 
+### 3. logged in users can add a new comment on any post
+   main funtion involved to add anew comment on any post is shown in this code
+```
+if (addNewComment($userId, $postId, $comment)) {
+  $isSuccess = true;
+  $errorMessage = "";
+}
+
+send_response($isSuccess, $errorMessage);
+
+function send_response($isSuccess, $errorMessage)
+{
+  echo json_encode([
+    "success" => $isSuccess,
+    "errroMessage" => $errorMessage
+  ]);
+}
+
+function addNewComment($userId, $postId, $comment)
+{
+  $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+  if ($mysqli->connect_errno) {
+    printf("Database connection failed: %s\n", $mysqli->connect_errno);
+    return false;
+  }
+  ```
+### 4. logged in user can edit like update and delete their own posts in the mini facebook app
+this code is used in our project to delete their own post when user is on successful login
+```
+if (deletePost($postId)) {
+  $isSuccess = true;
+  $errorMessage = "";
+}
+
+send_response($isSuccess, $errorMessage);
+
+function send_response($isSuccess, $errorMessage)
+{
+  echo json_encode([
+    "success" => $isSuccess,
+    "errorMessage" => $errorMessage
+  ]);
+}
+```
+### 5. logged in user cannot edit others posts
+   we used used this funtionality in our project we are going to present a vedio representation about this indetail in our final work
+### 6.   Created and designed Database queries
+we added and created the database-data.sql file for this project and we submitted a copy of our database-data.sql file in this sprint.
 * updated the src folder by removing old-src, update the repositor.
 
 # Security analysis
