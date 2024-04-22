@@ -96,28 +96,24 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
    * database designing and implementation
   ## code for database implementation (creating posts code)
   in this code we created a table to store posts data 
-  
   ```CREATE TABLE posts (
     postID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
     title VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-		FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
-);
-```
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+``` 
    * Planned Sprint 2
    * Divided the tasks among ourselves
 ### 2 logged in users can add a new post
 logged in users can add a new post
 to implement this feature we used this code in our project. this is the function we used in our project to addnewpost to our mini facebook page.
-```
-function addNewPost($userId, $postTitle, $postContent)
+```function addNewPost($userId, $postTitle, $postContent)
 {
   $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
   if ($mysqli->connect_errno) {
-    printf("Database connection failed:", $mysqli->connect_errno);
+    printf("Database connection failed:", $mysqliconnect_errno);
     return false;
   }
 ``` 
