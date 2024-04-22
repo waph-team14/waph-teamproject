@@ -117,7 +117,7 @@ function addNewPost($userId, $postTitle, $postContent)
 {
   $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
   if ($mysqli->connect_errno) {
-    printf("Database connection failed: %s\n", $mysqli->connect_errno);
+    printf("Database connection failed:", $mysqli->connect_errno);
     return false;
   }
 ``` 
@@ -141,8 +141,7 @@ function send_response($isSuccess, $errorMessage)
 ```
 ### 4. logged in user can edit like update and delete their own posts in the mini facebook app
 this code is used in our project to delete their own post when user is on successful login
-```
-if (deletePost($postId)) {
+```if (deletePost($postId)) {
   $isSuccess = true;
   $errorMessage = "";
 }
