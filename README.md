@@ -96,6 +96,7 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
    * database designing and implementation
   ## code for database implementation (creating posts code)
   in this code we created a table to store posts data 
+  
   ```CREATE TABLE posts (
     postID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
@@ -103,12 +104,16 @@ sudo mysql -u waphteam14 -p < database/database-data.sql
     content TEXT NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
-``` 
+```
+
    * Planned Sprint 2
    * Divided the tasks among ourselves
+   * 
 ### 2 logged in users can add a new post
+
 logged in users can add a new post
 to implement this feature we used this code in our project. this is the function we used in our project to addnewpost to our mini facebook page.
+
 ```function addNewPost($userId, $postTitle, $postContent)
 {
   $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
@@ -116,9 +121,12 @@ to implement this feature we used this code in our project. this is the function
     printf("Database connection failed:", $mysqliconnect_errno);
     return false;
   }
-``` 
+```
+
 ### 3. logged in users can add a new comment on any post
+
    main funtion involved to add anew comment on any post is shown in this code
+   
 ```
 if (addNewComment($userId, $postId, $comment)) {
   $isSuccess = true;
@@ -135,8 +143,11 @@ function send_response($isSuccess, $errorMessage)
   ]);
 }
 ```
+
 ### 4. logged in user can edit like update and delete their own posts in the mini facebook app
+
 this code is used in our project to delete their own post when user is on successful login
+
 ```if (deletePost($postId)) {
   $isSuccess = true;
   $errorMessage = "";
@@ -152,6 +163,7 @@ function send_response($isSuccess, $errorMessage)
   ]);
 }
 ```
+
 ### 5. logged in user cannot edit others posts
    we used used this funtionality in our project we are going to present a vedio representation about this indetail in our final work
 ### 6.   Created and designed Database queries
