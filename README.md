@@ -25,6 +25,8 @@
 |24/03/2024 |0.1        |Sprint 0       |
 |-----------|-----------|---------------|
 |31/03/2024 |0.2        |Sprint 1       |
+|-----------|-----------|---------------|
+|21/04/2024 |0.3        |Sprint 2       |
 
 # Overview
 * In this team project, we are going to develop a mini facebook application with minimal features such as posting real time chat.
@@ -88,6 +90,8 @@ The system will have two roles.
 sudo mysql -u root < database/database-account.sql
 sudo mysql -u waphteam14 -p < database/database-data.sql
 ```
+## Sprint 2
+* updated the src folder by removing old-src, update the repositor.
 
 # Security analysis
 
@@ -188,12 +192,14 @@ Duration: 16/04/2024-21/22/2024
 2. introduced new pages and updated previous pages  
 
 #### Contributions: 
-1. Rohith Koppula, 3 commits, 8 hours, contributed in generating editProfile, view profile pages and edited the README.md.
+1. Rohith Koppula, 4 commits, 8 hours, contributed in generating editProfile, view profile pages and edited the README.md.
 2. Phani Gopaluni, 10 commits, 8 hours, contributed in implementing new data in database-data.sql and created posts page along with several action for the post page involvements 
 <<<<<<< HEAD
-3. Sravan Kumar, 4 commits, 4 hours, contributed in creating login form, registration form and as well as forget password form with csrf validations and little styling to the forms.
-4. Jaswanth Bollepalli, 6 commits, 4 hours, contributed in editing README.md file and tested the current database and gathered information for navigation bar included in our project .including navigatiom.html file including file links to logout.html,chat.html,profile.html
+3. Sravan Kumar, 4 commits, 8 hours, implemented several changes on login page, registration page and as well as change password.
+4. Jaswanth Bollepalli, 3 commits, 8 hours,implemented changes on css and tested the application during the development phase and contributed in creating the posts page with phani
 >>>>>>> origin/main
+
+***note:*** We finished the sprint by cooperating as a team, putting our ideas into practice through frequent feedback and project reconsiderations. This project phase has given us a lot of experience because we have discussed our ideas and executed them with a greater understanding.
 
 
 # Appendix
