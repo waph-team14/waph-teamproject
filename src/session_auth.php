@@ -1,7 +1,7 @@
 <?php
 $lifetime = 15 * 60;
 $path = "/";
-$domain = "192.167.9.71";
+$domain = "waph-team14.minifacebook.com";
 $secure = true;
 $httponly = true;
 session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
