@@ -80,6 +80,7 @@
     function validateForm() {
       let email = document.getElementById('email').value;
       let password = document.getElementById('password').value;
+      let phoneNumber = document.getElementById('phone').value;
       let confirmPassword = document.getElementById('confirmPassword').value;
 
       if (password !== confirmPassword) {
@@ -95,6 +96,11 @@
         });
         return false;
       }
+
+        if (!/^\d{10}$/.test(phoneNumber)) {
+        M.toast({ html: 'Phone number should contain exactly 10 digits and no letters' });
+        return false;
+        }
       return true;
     }
   </script>
