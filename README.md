@@ -217,6 +217,23 @@ Duration: 16/04/2024-21/22/2024
 4. Jaswanth Bollepalli, 3 commits, 8 hours,implemented changes on css and tested the application during the development phase and contributed in creating the posts page with phani
 >>>>>>> origin/main
 
+### Sprint 3
+Duration: 22/04/2024
+#### Completed tasks:
+1. Created a superuser can disable/enable an account.
+   *  Did pair programming with whole team.
+2. Verifiation of Superuser.
+
+#### Contributions:
+1. Sravan Kumar, 2 commit, 3 hours, contributed in working on superuser disable/enable of registered users and a bit css modifications and README modifying.
+2. Phani, 1 hour, contributed on superuser disable/enable of registered users.
+<<Lead
+3. Rohith 3 commits, 3 hours Verfying the superuser logging and as well as verfied disabled account login and created video presentaton for the submission.
+4. Jaswanth, Verfying the superuser logging and as well as verfied disabled account login and created video presentaton for the submission.
+>>>>>>> origin/main
+
+
+
 ***note:*** We finished the sprint by cooperating as a team, putting our ideas into practice through frequent feedback and project reconsiderations. This project phase has given us a lot of experience because we have discussed our ideas and executed them with a greater understanding.
 
 
