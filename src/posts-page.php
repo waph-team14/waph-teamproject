@@ -158,6 +158,12 @@ $_SESSION["nocsrftoken"] = $rand;
                     $('.post-content').prop('disabled', true);
                   });
                 }
+              },
+              failure: (_, status, error) => {
+                M.toast({
+                  html: "Some error occurred",
+                  classes: 'red'
+                })
               }
             })
           })

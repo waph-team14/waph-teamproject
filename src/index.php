@@ -31,7 +31,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 		$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
 	} else {
 		session_destroy();
-		echo "<script>alert('Invalid username/password');window.location='login-form.php';</script>";
+		echo "<script>alert('Invalid username/password or Account is Disabled');window.location='login-form.php';</script>";
 		die();
 	}
 }
@@ -88,6 +88,11 @@ function checklogin_mysql($username, $password)
 		<div class="nav-wrapper blue">
 			<a href="index.php" class="brand-logo p2">Mini Facebook</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<?php
+				if ($_SESSION['isSuperuser'] && $_SESSION['isSuperuser'] == true) {
+					echo "<li><a href='admin-panel.php'>Admin Panel</a></li>";
+				}
+				?>
 				<li><a href="posts-page.php">Posts</a></li>
 				<li><a href="editprofileform.php">Profile</a></li>
 				<li><a href="logout.php">Logout</a></li>
