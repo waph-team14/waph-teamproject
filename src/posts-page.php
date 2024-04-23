@@ -193,7 +193,7 @@ $_SESSION["nocsrftoken"] = $rand;
               type: 'POST',
               data: payload,
               success: (response) => {
-                console.log('iside click event', $(this).data('id'))
+                console.log('inside click event', $(this).data('id'))
                 if (response.success) {
                   M.toast({
                     html: 'Successfully updated the post',
@@ -232,7 +232,7 @@ $_SESSION["nocsrftoken"] = $rand;
               type: 'POST',
               data: payload,
               success: (response) => {
-                console.log('iside click event', $(this).data('id'))
+                console.log('inside click event', $(this).data('id'))
                 if (response.success) {
                   M.toast({
                     html: 'Successfully deleted the post',
