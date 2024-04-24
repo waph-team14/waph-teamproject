@@ -2180,5 +2180,214 @@ Include the content (in text, not as images) of the SQL files and all source cod
       </body>
 
 
+**registration-form.php**
+
+      <!DOCTYPE html>
+      <html lang="en">
+      
+      <head>
+      <meta charset="utf-8">
+      <title>WAPH-Registration page</title>
+      </script>
+      </head>
+      
+      <body>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+      <style>
+      /* Center the form on the page */
+      .valign-wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      
+      .form-container {
+      width: 50%;
+      max-width: 400px;
+      }
+      </style>
+      
+      <div class="container">
+      <div class="valign-wrapper">
+      <div class="form-container">
+      <h3>Register</h3>
+      <form action="addnewuser.php" onsubmit="return validateForm()" method="POST" class="col s12">
+      <div class="row">
+      <div class="input-field col s12">
+      <input name="username" id="username" type="text" class="validate" required>
+      <label for="username">Username</label>
+      <span class="helper-text" data-error="Invalid username" data-success=""></span>
+      </div>
+      <div class="input-field col s12">
+      <input name="name" id="name" type="text" class="validate" required>
+      <label for="name">Name</label>
+      </div>
+      <div class="input-field col s12">
+      <input name="email" id="email" type="email" class="validate" required>
+      <label for="email">Email</label>
+      <span class="helper-text" data-error="Invalid email" data-success=""></span>
+      </div>
+      <div class="input-field col s12">
+      <input name="phone" id="phone" type="tel" class="validate" required>
+      <label for="phone">Phone Number</label>
+      <span class="helper-text" data-error="Invalid phone number" data-success=""></span>
+      </div>
+      <div class="input-field col s12">
+      <input name="password" id="password" type="password" class="validate" required pattern=".{6,}">
+      <label for="password">Password</label>
+      <span class="helper-text" data-error="Invalid password" data-success="">Minimum 6 characters</span>
+      </div>
+      <div class="input-field col s12">
+      <input name="confirmPassword" id="confirmPassword" type="password" class="validate" required>
+      <label for="password">Confirm Password</label>
+      </div>
+      <div class="col s12">
+      <button class="btn waves-effect waves-light" name="action" type="submit">Register
+       <i class="material-icons right">send</i>
+      </button>
+      </div>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      
+      <script>
+      function validateForm() {
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      let phoneNumber = document.getElementById('phone').value;
+      let confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+      M.toast({
+      html: `Passwords doesn't match`
+      });
+      return false;
+      }
+      
+      if (!email.includes('@') || password.length < 6) {
+      M.toast({
+      html: 'Please fill the form correctly!'
+      });
+      return false;
+      }
+      
+      if (!/^\d{10}$/.test(phoneNumber)) {
+      M.toast({ html: 'Phone number should contain exactly 10 digits and no letters' });
+      return false;
+      }
+      return true;
+      }
+      </script>
+      </body>
+      
+      </html>
+
+
+**session_auth.php**
+
+      <?php
+      $lifetime = 15 * 60;
+      $path = "/";
+      $domain = "waph-team14.minifacebook.com";
+      $secure = true;
+      $httponly = true;
+      session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
+      session_start();
+      
+      if (!isset($_SESSION["authenticated"]) or $_SESSION["authenticated"] != TRUE) {
+      session_destroy();
+      echo "<script>alert('You have not login. Please login first!')</script>";
+      header("Refresh: 0; url=login-form.php");
+      die();
+      }
+      
+      if ($_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]) {
+      session_destroy();
+      echo "<script>alert('Session Hijacking is Detected')</script>";
+      header("Refresh: 0; url=login-form.php");
+      die();
+      }
+
+
+**update-post.php**
+
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $postId = sanitize_input($_POST["postId"]);
+      $postTitle = sanitize_input($_POST["title"]);
+      $postContent = sanitize_input($_POST["content"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (updatePost($postId, $postTitle, $postContent)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errorMessage" => $errorMessage
+      ]);
+      }
+      
+      function updatePost($postId, $postTitle, $postContent)
+      {
+      global $errorMessage;
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "UPDATE waph_team.posts set title=?, content=? where postId=?";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("ssd", $postTitle, $postContent, $postId);
+      
+      if ($stmt->execute()) {
+      if ($stmt->affected_rows == 1) {
+      return true;
+      } else {
+      $errorMessage = "Neither title nor content is modified.";
+      }
+      }
+      return false;
+      }
+
+
 
 
