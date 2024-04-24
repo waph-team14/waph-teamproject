@@ -118,7 +118,7 @@ A user can adding a post, delete it and can comment their own/other's post.
 
 Edit profile: A way to update their profile information.
 
-![edit profile](imgaes/edit_profile.png)
+![edit profile](images/edit_profile.png)
 
 ![updated profile](images/updated_edit.png)
 
