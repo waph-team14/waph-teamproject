@@ -96,7 +96,7 @@ Registration: Anybody can sign-up for the account.
 
 Login: Invalid attempt and successful login methods.
 
-![Login](images/loginrequired.png)
+![Login](images/login_required.png)
 
 ![Login](images/login.png)
 
