@@ -311,59 +311,59 @@ Duration: 23/04/2024
 Include the content (in text, not as images) of the SQL files and all source code of your PHP files (with the file name). 
 
 **database-account.sql**
-   create database waph_team;
-   CREATE USER 'waphteam14'@'localhost' IDENTIFIED BY '1234';
-   GRANT ALL ON waph_team.* TO 'waphteam14'@'localhost';
+      create database waph_team;
+      CREATE USER 'waphteam14'@'localhost' IDENTIFIED BY '1234';
+      GRANT ALL ON waph_team.* TO 'waphteam14'@'localhost';
 
 **database-data.sql**
-   USE waph_team;
-   
-   DROP TABLE IF EXISTS `users`;
-   DROP TABLE IF EXISTS `posts`;
-   DROP TABLE IF EXISTS `comments`;
-   DROP TABLE IF EXISTS `chat`;
-   
-   CREATE TABLE users (
-       userId INT AUTO_INCREMENT PRIMARY KEY,
-       username VARCHAR(255) UNIQUE NOT NULL,
-       email VARCHAR(255) UNIQUE NOT NULL,
-       additionalEmail VARCHAR(255),
-       password VARCHAR(255) NOT NULL,
-       name VARCHAR(255),
-       phone VARCHAR(20),
-       isDisabled BOOLEAN NOT NULL DEFAULT FALSE,
-       isSuperuser BOOLEAN NOT NULL DEFAULT FALSE
-   );
-   
-   CREATE TABLE posts (
-       postID INT AUTO_INCREMENT PRIMARY KEY,
-       userID INT NOT NULL,
-       title VARCHAR(100) NOT NULL,
-       content TEXT NOT NULL,
-       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-       
-   		FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
-   );
-   
-   CREATE TABLE comments (
-       commentID INT AUTO_INCREMENT PRIMARY KEY,
-       postID INT NOT NULL,
-       userID INT NOT NULL,
-       comment TEXT NOT NULL,
-       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-       FOREIGN KEY (postID) REFERENCES posts(postID) ON DELETE CASCADE,
-       FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
-   );
-   
-   CREATE TABLE chat (
-       chatID INT AUTO_INCREMENT PRIMARY KEY,
-       fromUserID INT NOT NULL,
-       toUserID INT NOT NULL,
-       message TEXT NOT NULL,
-       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-       FOREIGN KEY (fromUserID) REFERENCES users(userID) ON DELETE CASCADE,
-       FOREIGN KEY (toUserID) REFERENCES users(userID) ON DELETE CASCADE
-   );
+      USE waph_team;
+      
+      DROP TABLE IF EXISTS `users`;
+      DROP TABLE IF EXISTS `posts`;
+      DROP TABLE IF EXISTS `comments`;
+      DROP TABLE IF EXISTS `chat`;
+      
+      CREATE TABLE users (
+      userId INT AUTO_INCREMENT PRIMARY KEY,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      additionalEmail VARCHAR(255),
+      password VARCHAR(255) NOT NULL,
+      name VARCHAR(255),
+      phone VARCHAR(20),
+      isDisabled BOOLEAN NOT NULL DEFAULT FALSE,
+      isSuperuser BOOLEAN NOT NULL DEFAULT FALSE
+      );
+      
+      CREATE TABLE posts (
+      postID INT AUTO_INCREMENT PRIMARY KEY,
+      userID INT NOT NULL,
+      title VARCHAR(100) NOT NULL,
+      content TEXT NOT NULL,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+      
+      FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+      );
+      
+      CREATE TABLE comments (
+      commentID INT AUTO_INCREMENT PRIMARY KEY,
+      postID INT NOT NULL,
+      userID INT NOT NULL,
+      comment TEXT NOT NULL,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (postID) REFERENCES posts(postID) ON DELETE CASCADE,
+      FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+      );
+      
+      CREATE TABLE chat (
+      chatID INT AUTO_INCREMENT PRIMARY KEY,
+      fromUserID INT NOT NULL,
+      toUserID INT NOT NULL,
+      message TEXT NOT NULL,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (fromUserID) REFERENCES users(userID) ON DELETE CASCADE,
+      FOREIGN KEY (toUserID) REFERENCES users(userID) ON DELETE CASCADE
+      );
    
    
 **add-comment.php**
@@ -434,318 +434,322 @@ Include the content (in text, not as images) of the SQL files and all source cod
 
 
 **addnewuser.php**
-   <?php
-   ini_set('display_errors', 1);
-   ini_set('display_startup_errors', 1);
-   error_reporting(E_ALL);
-   $username = sanitize_input($_POST["username"]);
-   $password = sanitize_input($_POST["password"]);
-   $name = sanitize_input($_POST["name"]);
-   $email = sanitize_input($_POST["email"]);
-   $phone = sanitize_input($_POST["phone"]);
-   
-   if (validate_form($username, $password, $name, $email, $phone)) {
-   	$code = addnewuser($username, $password, $name, $email, $phone);
-   	if ($code == 1) {
-   		echo "Registration succeed!";
-   	} else if ($code == -3) {
-   		echo "Registration failed";
-   	} else if ($code == -2) {
-   		echo "Username already exists";
-   	} else {
-   		echo "Some unknown error occured";
-   	}
-   }
-   
-   function validate_form($username, $password, $name, $email, $phone)
-   {
-   	if (!(isset($username) and isset($password) and isset($name) and isset($email))) {
-   		echo "all the fields are not set properly";
-   		return false;
-   	}
-   	if ((empty($username) or empty($password) or empty($name) or empty($email))) {
-   		echo "some fields are empty";
-   		return false;
-   	}
-   	if (!preg_match("/^[\w.-]+@[\w-]+(.[\w-]+)*$/", $email)) {
-   		echo "email regex didn't matched";
-   		return false;
-   	};
-   	if (!preg_match("/.{6,}/", $password)) {
-   		echo "password regex didn't matched";
-   		return false;
-   	}
-   	if (!preg_match("/[0-9]{10}/", $phone)) {
-   		echo "phone number regex didn't matched";
-   		return false;
-   	}
-   	return true;
-   }
-   
-   function sanitize_input($input)
-   {
-   	$input = trim($input);
-   	$input = stripslashes($input);
-   	$input = htmlspecialchars($input);
-   	return $input;
-   }
-   
-   function addnewuser(
-   	$username,
-   	$password,
-   	$name,
-   	$email,
-     $phone
-   ) {
-   	$mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
-   
-   	if ($mysqli->connect_errno) {
-   		printf("Database connection failed: %s\n", $mysqli->connect_errno);
-   		return -1;
-   	}
-   
-   	$username_check_sql = "SELECT * FROM users WHERE username = ?";
-   	$username_check_stmt = $mysqli->prepare($username_check_sql);
-   	$username_check_stmt->bind_param("s", $username);
-   
-   	$username_check_stmt->execute();
-   	$result = $username_check_stmt->get_result();
-   	if ($result->num_rows > 0)
-   		return -2;
-   
-   	$prepared_sql = "INSERT INTO users (username, password, name, email, phone, isDisabled, isSuperuser) VALUES (?, md5(?), ?, ?, ?, false, false)";
-   	$stmt = $mysqli->prepare($prepared_sql);
-   	$stmt->bind_param("sssss", $username, $password, $name, $email, $phone);
-   
-   	if ($stmt->execute()) {
-   		return 1;
-   	}
-   	return -3;
-   }
-   ?><p><a href="login-form.php">Login</a></p>
+      <?php
+      ini_set('display_errors', 1);
+      ini_set('display_startup_errors', 1);
+      error_reporting(E_ALL);
+      $username = sanitize_input($_POST["username"]);
+      $password = sanitize_input($_POST["password"]);
+      $name = sanitize_input($_POST["name"]);
+      $email = sanitize_input($_POST["email"]);
+      $phone = sanitize_input($_POST["phone"]);
+      
+      if (validate_form($username, $password, $name, $email, $phone)) {
+      $code = addnewuser($username, $password, $name, $email, $phone);
+      if ($code == 1) {
+      echo "Registration succeed!";
+      } else if ($code == -3) {
+      echo "Registration failed";
+      } else if ($code == -2) {
+      echo "Username already exists";
+      } else {
+      echo "Some unknown error occured";
+      }
+      }
+      
+      function validate_form($username, $password, $name, $email, $phone)
+      {
+      if (!(isset($username) and isset($password) and isset($name) and isset($email))) {
+      echo "all the fields are not set properly";
+      return false;
+      }
+      if ((empty($username) or empty($password) or empty($name) or empty($email))) {
+      echo "some fields are empty";
+      return false;
+      }
+      if (!preg_match("/^[\w.-]+@[\w-]+(.[\w-]+)*$/", $email)) {
+      echo "email regex didn't matched";
+      return false;
+      };
+      if (!preg_match("/.{6,}/", $password)) {
+      echo "password regex didn't matched";
+      return false;
+      }
+      if (!preg_match("/[0-9]{10}/", $phone)) {
+      echo "phone number regex didn't matched";
+      return false;
+      }
+      return true;
+      }
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      function addnewuser(
+      $username,
+      $password,
+      $name,
+      $email,
+      $phone
+      ) {
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return -1;
+      }
+      
+      $username_check_sql = "SELECT * FROM users WHERE username = ?";
+      $username_check_stmt = $mysqli->prepare($username_check_sql);
+      $username_check_stmt->bind_param("s", $username);
+      
+      $username_check_stmt->execute();
+      $result = $username_check_stmt->get_result();
+      if ($result->num_rows > 0)
+      return -2;
+      
+      $prepared_sql = "INSERT INTO users (username, password, name, email, phone, isDisabled, isSuperuser)
+      VALUES (?, md5(?), ?, ?, ?, false, false)";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("sssss", $username, $password, $name, $email, $phone);
+      
+      if ($stmt->execute()) {
+      return 1;
+      }
+      return -3;
+      }
+      ?><p><a href="login-form.php">Login</a></p>
 
 **add-post.php**
-<?php
-// ini_set( 'display_errors', '1');
-// ini_set( 'display_startup_errors', '1');
-// error_reporting (E_ALL); 
-require "session_auth.php";
-header('Content-Type: application/json');
-
-$userId = sanitize_input($_SESSION["userId"]);
-$postTitle = sanitize_input($_POST["post-title"]);
-$postContent = sanitize_input($_POST["post-content"]);
-
-$isSuccess = false;
-$errorMessage = 'Some Unknown Error Occurred';
-
-function sanitize_input($input)
-{
-  $input = trim($input);
-  $input = stripslashes($input);
-  $input = htmlspecialchars($input);
-  return $input;
-}
-
-$token = $_POST["nocsrftoken"];
-if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
-  $errorMessage = "CSRF Attack is detected";
-  send_response($isSuccess, $errorMessage);
-  die();
-}
-
-if (addNewPost($userId, $postTitle, $postContent)) {
-  $isSuccess = true;
-  $errorMessage = "";
-}
-
-send_response($isSuccess, $errorMessage);
-
-function send_response($isSuccess, $errorMessage)
-{
-  echo json_encode([
-    "success" => $isSuccess,
-    "errroMessage" => $errorMessage
-  ]);
-}
-
-function addNewPost($userId, $postTitle, $postContent)
-{
-  $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
-  if ($mysqli->connect_errno) {
-    printf("Database connection failed: %s\n", $mysqli->connect_errno);
-    return false;
-  }
-
-  $prepared_sql = "INSERT INTO waph_team.posts (userID, title, content) VALUES(?, ?, ?);";
-  $stmt = $mysqli->prepare($prepared_sql);
-  $stmt->bind_param("dss", $userId, $postTitle, $postContent);
-
-  if ($stmt->execute()) {
-    if ($stmt->affected_rows == 1) {
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $userId = sanitize_input($_SESSION["userId"]);
+      $postTitle = sanitize_input($_POST["post-title"]);
+      $postContent = sanitize_input($_POST["post-content"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (addNewPost($userId, $postTitle, $postContent)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errroMessage" => $errorMessage
+      ]);
+      }
+      
+      function addNewPost($userId, $postTitle, $postContent)
+      {
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "INSERT INTO waph_team.posts (userID, title, content) VALUES(?, ?, ?);";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("dss", $userId, $postTitle, $postContent);
+      
+      if ($stmt->execute()) {
+      if ($stmt->affected_rows == 1) {
       return true;
-    }
-  }
-  return false;
-}
-
-
-
-**admin-panel.php**
-<?php
-// ini_set( 'display_errors', '1');
-// ini_set( 'display_startup_errors', '1');
-// error_reporting (E_ALL); 
-session_start();
-$rand = bin2hex(openssl_random_pseudo_bytes(16));
-$_SESSION["nocsrftoken"] = $rand;
-
-if ($_SESSION["isSuperuser"] && $_SESSION["isSuperuser"] == true) {
-?>
-
-  <body>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <nav>
-      <div class="nav-wrapper blue">
-        <a href="index.php" class="brand-logo p2">Mini Facebook</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="index.php">Home</a></li>
-          <li><a href="posts-page.php">Posts</a></li>
-          <li><a href="editprofileform.php">Profile</a></li>
-          <li><a href="logout.php">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col s8 offset-s2">
-          <input type="hidden" id="nocsrftoken" value="<?php echo $rand; ?>" />
-          <ul class="collection" id="users-list">
-
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function createUserListItem(user) {
-        const htmlContent = `
-          <li class="collection-item avatar">
-            <i class="material-icons">person</i>
-            <span class="title">${user.name}</span>
-            <p>Username: ${user.username}</p>
-            <p>Email: ${user.email}</p>
-            <p>Phone: ${user.phone}</p>
-        `;
-
-        const buttonContent = user.isDisabled ? `
-          <a class="btn waves-effect waves-light secondary-content red user-enable" data-id="${user.userID}">Enable <i class="material-icons right">person</i>
-          </a>
-          </li>
-        ` : `
-          <a class="btn waves-effect waves-light secondary-content red user-disable" data-id="${user.userID}">Disable <i class="material-icons right">person_off</i>
-          </a>
-          </li>
-        `;
-        return htmlContent + buttonContent;
+      }
+      }
+      return false;
       }
 
+
+
+      **admin-panel.php**
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      session_start();
+      $rand = bin2hex(openssl_random_pseudo_bytes(16));
+      $_SESSION["nocsrftoken"] = $rand;
+      
+      if ($_SESSION["isSuperuser"] && $_SESSION["isSuperuser"] == true) {
+      ?>
+      
+      <body>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+      <nav>
+      <div class="nav-wrapper blue">
+      <a href="index.php" class="brand-logo p2">Mini Facebook</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="index.php">Home</a></li>
+      <li><a href="posts-page.php">Posts</a></li>
+      <li><a href="editprofileform.php">Profile</a></li>
+      <li><a href="logout.php">Logout</a></li>
+      </ul>
+      </div>
+      </nav>
+      
+      <div class="container">
+      <div class="row">
+      <div class="col s8 offset-s2">
+      <input type="hidden" id="nocsrftoken" value="<?php echo $rand; ?>" />
+      <ul class="collection" id="users-list">
+      
+      </ul>
+      </div>
+      </div>
+      </div>
+      
+      <script>
+      function createUserListItem(user) {
+      const htmlContent = `
+      <li class="collection-item avatar">
+      <i class="material-icons">person</i>
+      <span class="title">${user.name}</span>
+      <p>Username: ${user.username}</p>
+      <p>Email: ${user.email}</p>
+      <p>Phone: ${user.phone}</p>
+      `;
+      
+      const buttonContent = user.isDisabled ? `
+      <a class="btn waves-effect waves-light secondary-content red user-enable" 
+      data-id="${user.userID}">Enable <i class="material-icons right">person</i>
+      </a>
+      </li>
+      ` : `
+      <a class="btn waves-effect waves-light secondary-content red user-disable" 
+      data-id="${user.userID}">Disable <i class="material-icons right">person_off</i>
+      </a>
+      </li>
+      `;
+      return htmlContent + buttonContent;
+      }
+      
       $(window).on('load', () => {
-        $.ajax({
-          url: 'get-users-list.php',
-          type: 'GET',
-          success: (response) => {
-            const results = JSON.parse(response);
-            if (results.success) {
-              results.data.forEach(user => {
-                const userListItem = createUserListItem(user);
-                $('#users-list').append(userListItem);
-              });
-            }
-          }
-        })
+      $.ajax({
+      url: 'get-users-list.php',
+      type: 'GET',
+      success: (response) => {
+      const results = JSON.parse(response);
+      if (results.success) {
+      results.data.forEach(user => {
+      const userListItem = createUserListItem(user);
+      $('#users-list').append(userListItem);
+      });
+      }
+      }
       })
-
+      })
+      
       $(document).on('click', '.user-disable', function(event) {
-        event.preventDefault();
-        const nocsrftoken = $('#nocsrftoken').val();
-        const userId = $(this).data('id');
-        const payload = `nocsrftoken=${nocsrftoken}&userId=${userId}`
-
-        $.ajax({
-          url: 'disable-user.php',
-          type: 'POST',
-          data: payload,
-          success: (response) => {
-            if (response.success) {
-              M.toast({
-                html: 'Successfully disabled the post',
-                classes: 'green'
-              })
-              location.reload();
-            } else {
-              M.toast({
-                html: response.errorMessage,
-                classes: 'red'
-              })
-            }
-          },
-          failure: (_, status, error) => {
-            M.toast({
-              html: "Some error occurred",
-              classes: 'red'
-            })
-          }
-        })
+      event.preventDefault();
+      const nocsrftoken = $('#nocsrftoken').val();
+      const userId = $(this).data('id');
+      const payload = `nocsrftoken=${nocsrftoken}&userId=${userId}`
+      
+      $.ajax({
+      url: 'disable-user.php',
+      type: 'POST',
+      data: payload,
+      success: (response) => {
+      if (response.success) {
+      M.toast({
+      html: 'Successfully disabled the post',
+      classes: 'green'
       })
-
+      location.reload();
+      } else {
+      M.toast({
+      html: response.errorMessage,
+      classes: 'red'
+      })
+      }
+      },
+      failure: (_, status, error) => {
+      M.toast({
+      html: "Some error occurred",
+      classes: 'red'
+      })
+      }
+      })
+      })
+      
       $(document).on('click', '.user-enable', function(event) {
-        event.preventDefault();
-        const nocsrftoken = $('#nocsrftoken').val();
-        const userId = $(this).data('id');
-        const payload = `nocsrftoken=${nocsrftoken}&userId=${userId}`
-
-        $.ajax({
-          url: 'enable-user.php',
-          type: 'POST',
-          data: payload,
-          success: (response) => {
-            if (response.success) {
-              M.toast({
-                html: 'Successfully enabled the post',
-                classes: 'green'
-              })
-              location.reload();
-            } else {
-              M.toast({
-                html: response.errorMessage,
-                classes: 'red'
-              })
-            }
-          },
-          failure: (_, status, error) => {
-            M.toast({
-              html: "Some error occurred",
-              classes: 'red'
-            })
-          }
-        })
+      event.preventDefault();
+      const nocsrftoken = $('#nocsrftoken').val();
+      const userId = $(this).data('id');
+      const payload = `nocsrftoken=${nocsrftoken}&userId=${userId}`
+      
+      $.ajax({
+      url: 'enable-user.php',
+      type: 'POST',
+      data: payload,
+      success: (response) => {
+      if (response.success) {
+      M.toast({
+      html: 'Successfully enabled the post',
+      classes: 'green'
       })
-    </script>
-  </body>
-<?php
-} else {
-  echo "<script>alert('you are not a superuser.'); window.location='index.php'</script>";
-}
-?>
+      location.reload();
+      } else {
+      M.toast({
+      html: response.errorMessage,
+      classes: 'red'
+      })
+      }
+      },
+      failure: (_, status, error) => {
+      M.toast({
+      html: "Some error occurred",
+      classes: 'red'
+      })
+      }
+      })
+      })
+      </script>
+      </body>
+      <?php
+      } else {
+      echo "<script>alert('you are not a superuser.'); window.location='index.php'</script>";
+      }
+      ?>
 
 
 
