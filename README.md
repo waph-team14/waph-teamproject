@@ -832,7 +832,794 @@ Include the content (in text, not as images) of the SQL files and all source cod
       </body>
    
 
+**changepasswordform.php**
 
+      <?php
+      require "session_auth.php";
+      
+      $rand = bin2hex(openssl_random_pseudo_bytes(16));
+      $_SESSION["nocsrftoken"] = $rand;
+      ?>
+      <!DOCTYPE html>
+      <html lang="en">
+      
+      <head>
+      <meta charset="utf-8">
+      <title>Change Password</title>
+      </head>
+      
+      <body>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+      <style>
+      /* Center the form on the page */
+      .valign-wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      
+      .form-container {
+      width: 50%;
+      max-width: 400px;
+      }
+      </style>
+      
+      <div class="container">
+      <nav>
+      <div class="nav-wrapper blue">
+      <a href="index.php" class="brand-logo p2">Mini Facebook</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="index.php">Home</a></li>
+      </ul>
+      </div>
+      </nav>
+      <div class="valign-wrapper">
+      <div class="form-container">
+      <h3>Change Password</h3>
+      <form action="changepassword.php" onsubmit="return validateForm()" method="POST" class="col s12">
+      <div class="row">
+      <input type="hidden" name="nocsrftoken" value="<?php echo $rand; ?>" />
+      <div class="input-field col s12">
+      <input name="password" id="password" type="password" class="validate" required pattern=".{6,}">
+      <label for="password">New Password</label>
+      <span class="helper-text" data-error="Invalid password" data-success="">Minimum 6 characters</span>
+      </div>
+      <div class="input-field col s12">
+      <input name="confirmPassword" id="confirmPassword" type="password" class="validate" required>
+      <label for="password">Confirm New Password</label>
+      </div>
+      <div class="col s12">
+      <button class="btn waves-effect waves-light" name="action" type="submit">Change Password
+      <i class="material-icons right">send</i>
+      </button>
+      </div>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      
+      <script>
+      function validateForm() {
+      let password = document.getElementById('password').value;
+      let confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+      M.toast({
+      html: `Passwords doesn't match`
+      });
+      return false;
+      }
+      
+      return true;
+      }
+      </script>
+      </body>
+      
+      </html>
+
+
+**delete-post.php**
+
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $postId = sanitize_input($_POST["postId"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (deletePost($postId)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errorMessage" => $errorMessage
+      ]);
+      }
+      
+      function deletePost($postId)
+      {
+      global $errorMessage;
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "DELETE FROM waph_team.posts WHERE postId=?";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("d", $postId);
+      
+      if ($stmt->execute()) {
+      if ($stmt->affected_rows == 1) {
+      return true;
+      } else {
+      $errorMessage = "Post doesn't exist in the database";
+      }
+      }
+      return false;
+      }
+
+
+**disable-user.php**
+
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $userId = sanitize_input($_POST["userId"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (disableUser($userId)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errorMessage" => $errorMessage
+      ]);
+      }
+      
+      function disableUser($userId)
+      {
+      global $errorMessage;
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "UPDATE waph_team.users SET isDisabled=true WHERE userID=?";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("d", $userId);
+      
+      if ($stmt->execute()) {
+      if ($stmt->affected_rows == 1) {
+      return true;
+      } else {
+      $errorMessage = "User doesn't exist in the database";
+      }
+      }
+      return false;
+      }
+
+
+
+**edit-profile.php**
+
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $username = sanitize_input($_SESSION["username"]);
+      $name = sanitize_input($_POST['name']);
+      $phone = sanitize_input($_POST["phone"]);
+      $email = sanitize_input($_POST["email"]);
+      $additionalEmail = sanitize_input($_POST["additionalEmail"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (editprofile($username, $name, $email, $additionalEmail, $phone)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errroMessage" => $errorMessage
+      ]);
+      }
+      
+      function editprofile($username, $name, $email, $additionalEmail, $phone)
+      {
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "UPDATE users SET name=?, email=?, additionalEmail=?, phone=? WHERE username=?";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("sssss", $name, $email, $additionalEmail, $phone, $username);
+      
+      if ($stmt->execute()) {
+      $_SESSION["name"] = $name;
+      $_SESSION["email"] = $email;
+      $_SESSION["additionalEmail"] = $additionalEmail;
+      $_SESSION["phone"] = $phone;
+      $stmt->close(); // Close statement
+      $mysqli->close(); // Close connection
+      return true;
+      }
+      return false;
+      }
+
+
+**editprofileform.php**
+
+      
+      <?php
+      require "session_auth.php";
+      
+      $rand = bin2hex(openssl_random_pseudo_bytes(16));
+      $_SESSION["nocsrftoken"] = $rand;
+      ?>
+      
+      <!DOCTYPE html>
+      <html lang="en">
+      
+      <head>
+      <meta charset="utf-8">
+      <title>WAPH-Edit Profile page</title>
+      </script>
+      </head>
+      
+      <body>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+      
+      <style>
+      /* Center the form on the page */
+      .valign-wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      
+      .form-container {
+      width: 50%;
+      max-width: 400px;
+      }
+      </style>
+      
+      <div class="container">
+      <nav>
+      <div class="nav-wrapper blue">
+      <a href="index.php" class="brand-logo p2">Mini Facebook</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="index.php">Home</a></li>
+      <li><a href="changepasswordform.php">Change Password</a></li>
+      <li><a href="logout.php">Logout</a></li>
+      </ul>
+      </div>
+      </nav>
+      <div class="valign-wrapper">
+      <div class="form-container">
+      <h3>Edit Profile</h3>
+      <form action="#" id="editProfileForm" method="POST" class="col s12">
+      <div class="row">
+      <input type="hidden" name="nocsrftoken" value="<?php echo $rand; ?>" />
+      <div class="input-field col s12">
+          <input name="name" id="name" type="text" class="validate" required>
+          <label for="name">Name</label>
+      </div>
+      
+      <div class="input-field col s12">
+          <input name="email" id="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="Invalid email" data-success=""></span>
+      </div>
+      
+       <div class="input-field col s12">
+          <input name="additionalEmail" id="additionalEmail" type="email" class="validate" required>
+          <label for="additionalEmail">Additional Email</label>
+          <span class="helper-text" data-error="Invalid email" data-success=""></span>
+      </div>
+      
+      <div class="input-field col s12">
+          <input name="phone" id="phone" type="tel" class="validate" required>
+          <label for="phone">Phone</label>
+          <span class="helper-text" data-error="Invalid phone number" data-success=""></span>
+      </div>
+      
+      <div class="col s12">
+          <button class="btn waves-effect waves-light" id="editButton" name="action">Edit
+              <i class="material-icons right">edit</i>
+          </button>
+      </div>
+      
+      <div class="col s12">
+          <button class="btn waves-effect waves-light" id="submitButton" name="action">Submit
+              <i class="material-icons right">send</i>
+          </button>
+      </div>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      
+      <script>
+      $(document).on('DOMContentLoaded', () => {
+      console.log("inside document ready event handler")
+      $('#name').val('<?php echo $_SESSION['name'] ?>')
+      $('#email').val('<?php echo $_SESSION['email'] ?>')
+      $('#additionalEmail').val('<?php echo $_SESSION['additionalEmail'] ?>')
+      $('#phone').val('<?php echo $_SESSION['phone'] ?>')
+      
+      $('input').prop('disabled', true);
+      $('label').addClass('active');
+      $("#submitButton").hide();
+      });
+      
+      $('#editButton').on('click', (event) => {
+      event.preventDefault()
+      $('input').prop('disabled', false);
+      $("#submitButton").show();
+      $("#editButton").hide();
+      })
+      
+      $('#submitButton').on('click', (event) => {
+      event.preventDefault();
+      
+      $.ajax({
+      url: 'edit-profile.php',
+      type: 'POST',
+      data: $("#editProfileForm").serialize(),
+      success: (response) => {
+      console.log(response);
+      const isSuccess = response.success;
+      const errorMessage = response.errorMessage;
+      if (isSuccess) {
+      M.toast({html: 'Successfully Updated Profile Details', classes: 'green'})
+      $('input').prop('disabled', true);
+      $("#submitButton").hide();
+      $("#editButton").show();
+      } else {
+      M.toast({html: errorMessage, classes: 'red'})
+      }
+      },
+      error: (_, status, error) => {
+      M.toast({html: 'Some error occurred.', classes: 'red'})
+      }
+      })
+      })
+      </script>
+      </body>
+
+</html>
+
+
+
+**enable-user.php**
+
+      
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      require "session_auth.php";
+      header('Content-Type: application/json');
+      
+      $userId = sanitize_input($_POST["userId"]);
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      $token = $_POST["nocsrftoken"];
+      if (!isset($token) or ($token != $_SESSION["nocsrftoken"])) {
+      $errorMessage = "CSRF Attack is detected";
+      send_response($isSuccess, $errorMessage);
+      die();
+      }
+      
+      if (enableUser($userId)) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage);
+      
+      function send_response($isSuccess, $errorMessage)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errorMessage" => $errorMessage
+      ]);
+      }
+      
+      function enableUser($userId)
+      {
+      global $errorMessage;
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "UPDATE waph_team.users SET isDisabled=false WHERE userID=?";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("d", $userId);
+      
+      if ($stmt->execute()) {
+      if ($stmt->affected_rows == 1) {
+      return true;
+      } else {
+      $errorMessage = "User doesn't exist in the database";
+      }
+      }
+      return false;
+      }
+
+
+
+**get-users-list.php**
+
+      <?php
+      
+      require "session_auth.php";
+      
+      $isSuccess = false;
+      $errorMessage = 'Some Unknown Error Occurred';
+      $users = [];
+      
+      if (listAllUsers()) {
+      $isSuccess = true;
+      $errorMessage = "";
+      }
+      
+      send_response($isSuccess, $errorMessage, $users);
+      
+      function send_response($isSuccess, $errorMessage, $users)
+      {
+      echo json_encode([
+      "success" => $isSuccess,
+      "errroMessage" => $errorMessage,
+      "data" => $users
+      ]);
+      }
+      
+      function listAllUsers()
+      {
+      global $users;
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      return false;
+      }
+      
+      $prepared_sql = "
+      SELECT userID, username, name, email, phone, isDisabled
+      FROM users
+      WHERE isSuperuser = FALSE
+      ";
+      $stmt = $mysqli->prepare($prepared_sql);
+      if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      while ($row = $result->fetch_assoc()) {
+      $users[] = $row;
+      }
+      return true;
+      }
+      return false;
+      }
+
+
+
+**index.php**
+
+      <?php
+      // ini_set( 'display_errors', '1');
+      // ini_set( 'display_startup_errors', '1');
+      // error_reporting (E_ALL); 
+      $lifetime = 15 * 60;
+      $path = "/";
+      $domain = "waph-team14.minifacebook.com";
+      $secure = true;
+      $httponly = true;
+      session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
+      session_start();
+      
+      $rand = bin2hex(openssl_random_pseudo_bytes(16));
+      $_SESSION["nocsrftoken"] = $rand;
+      
+      $username = sanitize_input($_POST["username"]);
+      $password = sanitize_input($_POST["password"]);
+      
+      function sanitize_input($input)
+      {
+      $input = trim($input);
+      $input = stripslashes($input);
+      $input = htmlspecialchars($input);
+      return $input;
+      }
+      
+      if (isset($_POST["username"]) and isset($_POST["password"])) {
+      if (checklogin_mysql($username, $password)) {
+      $_SESSION["authenticated"] = TRUE;
+      $_SESSION["username"] = $username;
+      $_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
+      } else {
+      session_destroy();
+      echo "<script>alert('Invalid username/password or Account is Disabled');window.location='login-form.php';</script>";
+      die();
+      }
+      }
+      
+      require "session_auth.php";
+      
+      function checklogin_mysql($username, $password)
+      {
+      $mysqli = new mysqli('localhost', 'waphteam14', '1234', 'waph_team');
+      if ($mysqli->connect_errno) {
+      printf("Database connection failed: %s\n", $mysqli->connect_errno);
+      exit();
+      }
+      
+      $prepared_sql = "SELECT userId, name, email, additionalEmail, phone, isSuperuser FROM users WHERE username = ? AND password = md5(?) AND isDisabled = false;";
+      $stmt = $mysqli->prepare($prepared_sql);
+      $stmt->bind_param("ss", $username, $password);
+      $stmt->execute();
+      $stmt->store_result();
+      
+      if ($stmt->num_rows == 1) {
+      $userId = null;
+      $name = null;
+      $email = null;
+      $additionalEmail = null;
+      $phone = null;
+      $isSuperuser = null;
+      $stmt->bind_result($userId, $name, $email, $additionalEmail, $phone, $isSuperuser);
+      $stmt->fetch();
+      
+      $_SESSION["userId"] = $userId;
+      $_SESSION["name"] = $name;
+      $_SESSION["email"] = $email;
+      $_SESSION["additionalEmail"] = $additionalEmail;
+      $_SESSION["phone"] = $phone;
+      $_SESSION["isSuperuser"] = $isSuperuser;
+      
+      return TRUE;
+      }
+      return FALSE;
+      }
+      ?>
+      
+      <body>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+      <nav>
+      <div class="nav-wrapper blue">
+      <a href="index.php" class="brand-logo p2">Mini Facebook</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <?php
+      if ($_SESSION['isSuperuser'] && $_SESSION['isSuperuser'] == true) {
+      echo "<li><a href='admin-panel.php'>Admin Panel</a></li>";
+      }
+      ?>
+      <li><a href="posts-page.php">Posts</a></li>
+      <li><a href="editprofileform.php">Profile</a></li>
+      <li><a href="logout.php">Logout</a></li>
+      </ul>
+      </div>
+      </nav>
+      
+      <div class="container">
+      <div class="row">
+      <section class="col s8 offset-s4">
+      <input type="hidden" id="nocsrftoken" value="<?php echo $rand; ?>" />
+      <div id="posts-wrapper">
+      
+      </div>
+      </section>
+      </div>
+      </div>
+      
+      <script>
+      function createCommentSection(comment) {
+      if (!comment.comment) return ``;
+      return `
+      <div>
+      <hr>
+      <p><strong> Comment by ${comment.commenterName} </strong></p>
+      <p>${comment.comment}</p>
+      </div>
+      `
+      }
+      
+      function createAPostCard(post) {
+      const postCard = `
+      <div class="row">
+      <div class="col s12 m6">
+      <div class="card darken-1">
+      <div class="card-content">
+      <span class="card-title"> Post by ${post.details.postedUser}</span>
+      <p class="post-title" type='text'><strong>${post.details.title}</strong></p>
+      <p class="materialize-p post-content" style="height: auto">${post.details.content}</p>
+      ${post.comments.map(createCommentSection).join('')}
+      </div>
+      <div class="card-action">
+      <div class="input-field col s12">
+      <input name="post-comment" type="text" class="validate post-comment">
+      <label class="active" for="post-comment">Comment</label>
+      </div>
+      <a class="btn waves-effect waves-light post-add-comment" data-id="${post.postID}">
+      Add Comment<i class="material-icons right">comment</i>
+      </a>
+      </div>
+      </div>
+      </div>
+      </div>
+      `;
+      return postCard;
+      }
+      
+      $(window).on('load', () => {
+      $.ajax({
+      url: 'list-all-posts.php',
+      type: 'GET',
+      success: (response) => {
+      const results = JSON.parse(response);
+      if (results.success) {
+      results.data.forEach(result => {
+      const post = JSON.parse(result.post);
+      console.log(post);
+      const postCard = createAPostCard(post);
+      $('#posts-wrapper').append(postCard);
+      })
+      }
+      }
+      })
+      })
+      
+      $(document).on('click', '.post-add-comment', function(event) {
+      
+      const nocsrftoken = $('#nocsrftoken').val();
+      const postId = $(this).data("id");
+      const comment = $(this).closest('.card-action').find('.post-comment').val()
+      
+      $.ajax({
+      url: 'add-comment.php',
+      type: 'POST',
+      data: `nocsrftoken=${nocsrftoken}&postId=${postId}&comment=${comment}`,
+      success: (response) => {
+      if (response.success) {
+      M.toast({
+      html: 'Successfully added a comment',
+      classes: 'green'
+      });
+      location.reload();
+      } else {
+      M.toast({
+      html: response.errorMessage,
+      classes: 'red'
+      })
+      }
+      },
+      failure: (_, status, error) => {
+      M.toast({
+      html: "Some error occurred",
+      classes: 'red'
+      })
+      }
+      })
+      })
+      </script>
+      </body>
 
 
 
