@@ -227,11 +227,10 @@ and implemented our ideas together and completed the sprint.
    * created posts page - phani
       * functions like add post delete post and update post were implemented.
       * comments on posts is implemeted.
-5. Sprint - 3
-   *Created a superuser - Phani,Sravan
-   *Created the functionality and disabiling and enabiling functions - Rohith, Jaswanth
-   *Video demonstration and README edit - Sravan, Rohith
-    
+5. Sprint - 3 ***
+ *Created a superuser - Phani,Sravan.*
+ *Created the functionality and disabiling and enabiling functions - Rohith, Jaswanth.*
+  Video demonstration and README edit - Sravan, Rohith.
 6. Video Demo & Report Submission.
 
 ### Sprint 0
