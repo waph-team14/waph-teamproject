@@ -27,6 +27,8 @@
 |31/03/2024 |0.2        |Sprint 1       |
 |-----------|-----------|---------------|
 |21/04/2024 |0.3        |Sprint 2       |
+|-----------|-----------|---------------|
+|23/04/2024 |0.4        |Sprint 3       |
 
 # Overview
 * In this team project, we are going to develop a mini facebook application with minimal features such as posting real time chat.
@@ -77,6 +79,70 @@ The system will have two roles.
 ![wireframe-7](wireframes/w7.jpeg)
 
 ![wireframe-8](wireframes/w8.jpeg)
+
+## Minifacebook Working flow and feature exploration
+
+Functinalities of the minifacebook
+
+Registration: Anybody can sign-up for the account.
+
+![Registration](images/register.png)
+
+![Registration](images/register2.png)
+
+![Registration](images/register3.png)
+
+![Registration](images/register4.png)
+
+Login: Invalid attempt and successful login methods.
+
+![Login](images/loginrequired.png)
+
+![Login](images/login.png)
+
+Home page: Successfull user login directs to the homepage of the minifacebook.
+
+![Home](images/homepage.png)
+
+A user can adding a post, delete it and can comment their own/other's post.
+
+![Adding post](images/adding_post.png)
+
+![post](images/adding_post_1.png)
+
+![Home](images/home_2.png)
+
+![Delete a post](images/delete_post.png)
+
+![posts page/ home page](images/posts_page.png)
+
+Edit profile: A way to update their profile information.
+
+![edit profile](imgaes/edit_profile.png)
+
+![updated profile](images/updated_edit.png)
+
+Change paswword: Changing password as per their need.
+
+![change password](images/passwordChanged.png)
+
+Superuser(Admin): A super user is an authority for the minifacebook.
+
+![Super user](images/super1.png)
+
+A Superuser can disable and enable a registered user account.
+
+![super user](images/super2.png)
+
+![super user](images/super3.png)
+
+A disabled user cannot login successfully.
+
+![disabiling user](images/disabled_user.png)
+
+![invalid attempt](images/invalid_user.png)
+
+![Logout](images/logout.png)
 
 
 # Implementation
@@ -161,8 +227,12 @@ and implemented our ideas together and completed the sprint.
    * created posts page - phani
       * functions like add post delete post and update post were implemented.
       * comments on posts is implemeted.
-6. Sprint - 3
-7. Video Demo & Report Submission.
+5. Sprint - 3
+   *Created a superuser - Phani,Sravan
+   *Created the functionality and disabiling and enabiling functions - Rohith, Jaswanth
+   *Video demonstration and README edit - Sravan, Rohith
+    
+6. Video Demo & Report Submission.
 
 ### Sprint 0
 Duration: 18/03/2024-24/03/2024
@@ -218,7 +288,7 @@ Duration: 16/04/2024-21/22/2024
 >>>>>>> origin/main
 
 ### Sprint 3
-Duration: 22/04/2024
+Duration: 23/04/2024
 #### Completed tasks:
 1. Created a superuser can disable/enable an account.
    *  Did pair programming with whole team.
