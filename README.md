@@ -21,8 +21,14 @@ A link to the team minifacebook [Source code repository (private access)](https:
 
 A link to [Github (public)](https://github.com/waph-team14/waph-team14.github.io)
 =======
+<<<<<<< HEAD
 A link to [Team Project homepage (public)](https://waph-team14.github.io)
 >>>>>>>
+=======
+[Project homepage (public)](waph-team14.github.io
+/index.html)
+>>>>>>> 82751427772a5687055b9aefd21e8e6fbccd83f2
+>>>>>>> 82f8fd0e434efcb1e108e1dd51dc366ce7fb173a
 
 # video url
 
