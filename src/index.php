@@ -2,6 +2,12 @@
 // ini_set( 'display_errors', '1');
 // ini_set( 'display_startup_errors', '1');
 // error_reporting (E_ALL); 
+$lifetime = 15 * 60;
+$path = "/";
+$domain = "waph-team14.minifacebook.com";
+$secure = true;
+$httponly = true;
+session_set_cookie_params($lifetime, $path, $domain, $secure, $httponly);
 session_start();
 
 $rand = bin2hex(openssl_random_pseudo_bytes(16));
@@ -149,7 +155,6 @@ function checklogin_mysql($username, $password)
 				url: 'list-all-posts.php',
 				type: 'GET',
 				success: (response) => {
-					console.log(response);
 					const results = JSON.parse(response);
 					if (results.success) {
 						results.data.forEach(result => {
