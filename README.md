@@ -17,7 +17,7 @@
 
 # Project Management Information
 [Source code repository (private access)](https://github.com/waph-team14/waph-teamproject)
-[Project homepage (public)](https://github.com/waph-team14/waph-team14.github.io)
+[Project homepage (public)](https://waph-team14.github.io/students.html)
 
 # video url
 
