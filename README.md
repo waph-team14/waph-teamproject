@@ -21,7 +21,8 @@
 
 [Project homepage (public)](https://github.com/waph-team14/waph-team14.github.io)
 =======
-[Project homepage (public)](https://waph-team14.github.io/students.html)
+[Project homepage (public)](waph-team14.github.io
+/index.html)
 >>>>>>> 82751427772a5687055b9aefd21e8e6fbccd83f2
 
 # video url
