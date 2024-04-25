@@ -17,6 +17,7 @@
 
 # Project Management Information
 [Source code repository (private access)](https://github.com/waph-team14/waph-teamproject)
+
 [Project homepage (public)](https://github.com/waph-team14/waph-team14.github.io)
 
 # video url
@@ -148,6 +149,59 @@ A disabled user cannot login successfully.
 
 ![Logout](images/logout.png)
 
+### Security and Non-security functionalities
+
+1. Our team project is deployed on HTTPS as https://waph-team14.minifacebook.com/index.php
+
+![Https](images/https.png)
+
+![Https](images/https1.png)
+
+2. Passwords are hashed when they are inserting into the database, and no root user account is used for maintaing the database.
+
+![Database](images/database.jpeg)
+
+![Databases](images/db1.jpeg)
+
+3. All sql statements are prepared statements.
+
+![Sql prepared statements](images/prepared.png)
+
+4. All inputs are validated in every layer. As per image shown, each code of the source files are followed in the same format.
+
+![Validated](images/sanitization.png)
+
+![patterns](images/patterns.png)
+
+5. HTML outputs are sanitized using json executions.
+
+![output](images/json.png)
+
+6. Role based
+
+Regular user cannot login as superuser since superuser is directly credentials are directly inserted into the database, where as normal user or need to go through the registration process.
+
+![Regular user](images/super1.png) 
+
+In this picture we can see that a superuser can only see the admin panel where as a regular user cannot have a admin panel.
+
+![Regular user](images/homepage.png)
+
+7. Session authenctication and hijacking is prevented.
+
+![prevented](images/session_authentication.png)
+
+8. CSRF prevention, since session is prevented we cannot access the cookie information, so csrf implementation code is provided as csrf prevention.
+
+![csrf](images/csrfimp.png)
+
+9. Integrated with open-soruce css templates.
+
+![css implementation](images/css_integration.png)
+
+10. A team webiste is provided with team members information along with their personal protfolio websites.
+
+![team website](images/team_website.png)
 
 # Implementation
 ## Sprint 0
