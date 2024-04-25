@@ -187,6 +187,10 @@ Regular user cannot login as superuser since superuser is directly credentials a
 
 ![Regular user](images/super1.png) 
 
+Regular user cannot edit/update posts of different users.
+
+![user](images/cannot.png)
+
 In this picture we can see that a superuser can only see the admin panel where as a regular user cannot have a admin panel.
 
 ![Regular user](images/homepage.png)
